@@ -1,53 +1,53 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Brain, Globe, Shield, Users, Target, Lightbulb } from "lucide-react";
+import { Brain, Globe, Shield, Users, Target, Search, BarChart3, Languages, Eye } from "lucide-react";
 
 const About = () => {
   const team = [
     {
-      name: "Alex Chen",
-      role: "AI/ML Engineer",
-      description: "Specialized in natural language processing and bias detection algorithms",
+      name: "Sarah Chen",
+      role: "AI Research Lead",
+      description: "PhD in Computational Linguistics, specializing in cross-cultural bias detection and multilingual NLP systems.",
       avatar: "🧑‍💻"
     },
     {
-      name: "Maria Rodriguez",
-      role: "Data Scientist",
-      description: "Expert in news analysis and sentiment classification systems",
-      avatar: "👩‍🔬"
+      name: "Marcus Rodriguez",
+      role: "Data Engineering",
+      description: "Expert in real-time news aggregation, sentiment analysis, and building scalable AI processing pipelines.",
+      avatar: "👨‍🔬"
     },
     {
-      name: "James Kim",
-      role: "Full-Stack Developer",
-      description: "Focused on creating intuitive user experiences for complex data",
-      avatar: "👨‍💻"
+      name: "Aisha Patel",
+      role: "Product & Ethics",
+      description: "Focuses on responsible AI development, ensuring our bias detection tools are fair and transparent.",
+      avatar: "👩‍💻"
     }
   ];
 
   const howItWorks = [
     {
       step: "01",
-      title: "Data Collection",
-      description: "We aggregate news articles from trusted sources worldwide using automated systems.",
-      icon: <Globe className="h-8 w-8 text-primary" />
+      title: "Topic Input",
+      description: "Users enter any news topic or headline they want to analyze for global perspectives.",
+      icon: <Search className="h-8 w-8 text-primary" />
     },
     {
       step: "02", 
-      title: "AI Analysis",
-      description: "Our GPT-powered NLP models analyze language patterns, tone, and framing to detect bias.",
-      icon: <Brain className="h-8 w-8 text-primary" />
+      title: "Multi-Source Aggregation",
+      description: "Our system fetches articles from trusted news sources across different countries and languages.",
+      icon: <Globe className="h-8 w-8 text-primary" />
     },
     {
       step: "03",
-      title: "Bias Classification",
-      description: "Articles are classified by political leaning and emotional sentiment with explanations.",
-      icon: <Shield className="h-8 w-8 text-primary" />
+      title: "AI Analysis",
+      description: "Advanced NLP models analyze each article for political bias, sentiment, and emotional patterns.",
+      icon: <Brain className="h-8 w-8 text-primary" />
     },
     {
       step: "04",
-      title: "User Interface",
-      description: "Clear visualizations help users understand different perspectives on the same story.",
-      icon: <Lightbulb className="h-8 w-8 text-primary" />
+      title: "Visual Comparison",
+      description: "Side-by-side presentation shows how different countries report the same story.",
+      icon: <BarChart3 className="h-8 w-8 text-primary" />
     }
   ];
 
@@ -58,8 +58,8 @@ const About = () => {
         <div className="text-center mb-16">
           <h1 className="text-4xl md:text-5xl font-bold mb-6">About BiasLens</h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            We're on a mission to help people uncover bias in news media and get a complete picture 
-            of important stories through the power of artificial intelligence.
+            Showing how the world sees the same news differently. We help users understand 
+            global perspectives through AI-powered analysis and transparent media technology.
           </p>
         </div>
 
@@ -68,13 +68,13 @@ const About = () => {
           <Card className="bg-gradient-hero text-white border-0 shadow-soft">
             <CardHeader className="text-center pb-8">
               <div className="mx-auto mb-4 w-16 h-16 bg-white/20 rounded-full flex items-center justify-center">
-                <Target className="h-8 w-8 text-white" />
+                <Eye className="h-8 w-8 text-white" />
               </div>
-              <CardTitle className="text-3xl mb-4">Our Mission</CardTitle>
+              <CardTitle className="text-3xl mb-4">What We Do</CardTitle>
               <CardDescription className="text-white/90 text-lg max-w-2xl mx-auto">
-                In an era of information overload and polarized media, we believe everyone deserves 
-                access to unbiased news analysis. BiasLens empowers readers to see beyond the spin 
-                and understand the full spectrum of perspectives on important issues.
+                BiasLens is an AI-powered platform that analyzes how different countries report 
+                the same news stories. Simply enter any topic, and we'll show you side-by-side 
+                perspectives from around the world, complete with bias detection and sentiment analysis.
               </CardDescription>
             </CardHeader>
           </Card>
@@ -85,8 +85,8 @@ const About = () => {
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold mb-4">How It Works</h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Our advanced AI system combines cutting-edge NLP technology with GPT models 
-              to provide comprehensive bias analysis
+              From topic input to global perspective analysis - see how we transform 
+              any news query into comprehensive cross-cultural insights
             </p>
           </div>
 
@@ -116,32 +116,33 @@ const About = () => {
         <section className="mb-16">
           <Card className="bg-muted/30 border-0 shadow-soft">
             <CardHeader className="text-center">
-              <CardTitle className="text-3xl mb-4">Powered by Advanced AI</CardTitle>
+              <CardTitle className="text-3xl mb-4">Advanced NLP & Multilingual Processing</CardTitle>
               <CardDescription className="text-lg max-w-3xl mx-auto">
-                We leverage state-of-the-art technology to provide accurate, reliable bias detection
+                Our platform combines multiple AI technologies to deliver real-time news analysis 
+                across languages and cultures
               </CardDescription>
             </CardHeader>
             <CardContent>
               <div className="grid md:grid-cols-3 gap-6 text-center">
                 <div>
                   <Brain className="h-12 w-12 text-primary mx-auto mb-3" />
-                  <h3 className="font-semibold mb-2">GPT Models</h3>
+                  <h3 className="font-semibold mb-2">NLP & Sentiment Analysis</h3>
                   <p className="text-sm text-muted-foreground">
-                    Advanced language models for nuanced text analysis
+                    Advanced models detect bias patterns, sentiment, and emotional language
                   </p>
                 </div>
                 <div>
-                  <Shield className="h-12 w-12 text-primary mx-auto mb-3" />
-                  <h3 className="font-semibold mb-2">NLP Pipeline</h3>
+                  <Languages className="h-12 w-12 text-primary mx-auto mb-3" />
+                  <h3 className="font-semibold mb-2">Multilingual Support</h3>
                   <p className="text-sm text-muted-foreground">
-                    Custom natural language processing for bias detection
+                    Process and analyze news content in 15+ languages with cultural context
                   </p>
                 </div>
                 <div>
                   <Globe className="h-12 w-12 text-primary mx-auto mb-3" />
-                  <h3 className="font-semibold mb-2">Global Sources</h3>
+                  <h3 className="font-semibold mb-2">Real-Time Aggregation</h3>
                   <p className="text-sm text-muted-foreground">
-                    Multilingual analysis across international news outlets
+                    Fetch and analyze articles from 50+ countries within seconds
                   </p>
                 </div>
               </div>

@@ -1,67 +1,50 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Search, TrendingUp, Globe, Shield, Zap } from "lucide-react";
-import { Link } from "react-router-dom";
-import ArticleCard from "@/components/ArticleCard";
+import { Search, Globe, Shield, Zap, Brain, BarChart3, Languages } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import heroImage from "@/assets/hero-news.jpg";
 
 const Home = () => {
-  const featuredArticles = [
-    {
-      id: "1",
-      title: "Global Climate Summit Reaches Historic Agreement on Carbon Emissions",
-      summary: "World leaders agree on ambitious targets for reducing greenhouse gas emissions by 2030, marking a significant step forward in international climate cooperation.",
-      source: "Reuters",
-      country: "United States",
-      bias: "Centre" as const,
-      date: "2024-01-15",
-    },
-    {
-      id: "2", 
-      title: "Tech Giants Face New Regulatory Challenges in European Markets",
-      summary: "EU lawmakers propose stricter data protection rules that could reshape how major technology companies operate across European markets.",
-      source: "BBC News",
-      country: "United Kingdom",
-      bias: "Left" as const,
-      date: "2024-01-14",
-    },
-    {
-      id: "3",
-      title: "Economic Growth Indicators Show Mixed Signals Across Global Markets",
-      summary: "Latest economic data reveals varied performance across different regions, with some markets showing strong growth while others face headwinds.",
-      source: "Financial Times",
-      country: "Germany",
-      bias: "Right" as const,
-      date: "2024-01-13",
-    },
-    {
-      id: "4",
-      title: "Breakthrough in Renewable Energy Storage Technology Announced",
-      summary: "Scientists unveil new battery technology that could revolutionize renewable energy storage, making green power more reliable and cost-effective.",
-      source: "Nature Journal",
-      country: "Japan",
-      bias: "Centre" as const,
-      date: "2024-01-12",
-    },
-  ];
+  const [newsQuery, setNewsQuery] = useState("");
+  const navigate = useNavigate();
+
+  const handleAnalyze = () => {
+    if (newsQuery.trim()) {
+      navigate(`/results?q=${encodeURIComponent(newsQuery.trim())}`);
+    }
+  };
+
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      handleAnalyze();
+    }
+  };
 
   const features = [
     {
-      icon: <Shield className="h-8 w-8 text-primary" />,
-      title: "Bias Detection",
-      description: "Advanced AI analyzes political leaning and emotional sentiment in every article"
-    },
-    {
       icon: <Globe className="h-8 w-8 text-primary" />,
-      title: "Global Coverage",
-      description: "News from trusted sources worldwide in multiple languages"
+      title: "Global Perspectives",
+      description: "Compare how different countries report the same news story"
     },
     {
-      icon: <Zap className="h-8 w-8 text-primary" />,
-      title: "Real-time Analysis",
-      description: "Instant bias detection and explanation powered by cutting-edge NLP"
+      icon: <Brain className="h-8 w-8 text-primary" />,
+      title: "AI Bias Detection",
+      description: "Advanced NLP identifies political leaning and emotional sentiment"
+    },
+    {
+      icon: <BarChart3 className="h-8 w-8 text-primary" />,
+      title: "Visual Analysis",
+      description: "Clear charts and explanations make bias patterns easy to understand"
     }
+  ];
+
+  const exampleQueries = [
+    "Climate change policy",
+    "Economic sanctions",
+    "Immigration reform",
+    "Technology regulation"
   ];
 
   return (
@@ -79,36 +62,60 @@ const Home = () => {
               <span className="text-accent-foreground">Read Smarter.</span>
             </h1>
             <p className="text-xl md:text-2xl mb-8 text-white/90 max-w-2xl mx-auto">
-              Discover political bias in global news with AI-powered analysis. 
-              Get the complete picture, not just one perspective.
+              Enter any news topic and see how different countries report it. 
+              Discover bias patterns with AI-powered analysis.
             </p>
             
-            {/* Search Bar */}
-            <div className="max-w-md mx-auto mb-8">
+            {/* Central Input Bar */}
+            <div className="max-w-2xl mx-auto mb-8">
               <div className="relative">
-                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-6 w-6 text-muted-foreground" />
                 <Input
                   type="text"
-                  placeholder="Search news topics..."
-                  className="pl-12 h-12 text-lg bg-white/95 backdrop-blur border-0"
+                  placeholder="Enter a news topic or headline..."
+                  value={newsQuery}
+                  onChange={(e) => setNewsQuery(e.target.value)}
+                  onKeyPress={handleKeyPress}
+                  className="pl-14 h-14 text-lg bg-white/95 backdrop-blur border-0 rounded-lg"
                 />
               </div>
             </div>
             
-            <Button asChild size="lg" className="bg-white text-primary hover:bg-white/90 text-lg px-8 py-3">
-              <Link to="/categories">Start Exploring</Link>
+            {/* Example Queries */}
+            <div className="mb-8">
+              <p className="text-sm text-white/70 mb-3">Try these examples:</p>
+              <div className="flex flex-wrap justify-center gap-2">
+                {exampleQueries.map((query, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setNewsQuery(query)}
+                    className="px-3 py-1 text-sm bg-white/20 rounded-full hover:bg-white/30 transition-colors"
+                  >
+                    {query}
+                  </button>
+                ))}
+              </div>
+            </div>
+            
+            <Button 
+              onClick={handleAnalyze}
+              disabled={!newsQuery.trim()}
+              size="lg" 
+              className="bg-white text-primary hover:bg-white/90 text-lg px-8 py-3 disabled:opacity-50"
+            >
+              Analyze News
             </Button>
           </div>
         </div>
       </section>
 
-      {/* Features Section */}
+      {/* How It Works Section */}
       <section className="py-16 bg-muted/30">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold mb-4">How BiasLens Works</h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Our AI technology helps you understand the full story behind every news article
+              Enter a topic and see how the world reports it differently
             </p>
           </div>
           
@@ -132,26 +139,43 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Featured Articles */}
+      {/* Process Steps Section */}
       <section className="py-16">
         <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between mb-8">
-            <div>
-              <h2 className="text-3xl font-bold mb-2">Featured Articles</h2>
-              <p className="text-muted-foreground">Latest news with AI bias analysis</p>
-            </div>
-            <Button asChild variant="outline">
-              <Link to="/categories">
-                <TrendingUp className="mr-2 h-4 w-4" />
-                View All Categories
-              </Link>
-            </Button>
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold mb-4">The Process</h2>
+            <p className="text-muted-foreground">How we analyze news from around the world</p>
           </div>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {featuredArticles.map((article) => (
-              <ArticleCard key={article.id} {...article} />
-            ))}
+          <div className="grid md:grid-cols-4 gap-6">
+            <div className="text-center">
+              <div className="mx-auto mb-4 w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary font-bold text-xl">
+                1
+              </div>
+              <h3 className="font-semibold mb-2">Enter Topic</h3>
+              <p className="text-sm text-muted-foreground">Type any news headline or topic you want to analyze</p>
+            </div>
+            <div className="text-center">
+              <div className="mx-auto mb-4 w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary font-bold text-xl">
+                2
+              </div>
+              <h3 className="font-semibold mb-2">Fetch Articles</h3>
+              <p className="text-sm text-muted-foreground">We gather articles from multiple countries and sources</p>
+            </div>
+            <div className="text-center">
+              <div className="mx-auto mb-4 w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary font-bold text-xl">
+                3
+              </div>
+              <h3 className="font-semibold mb-2">AI Analysis</h3>
+              <p className="text-sm text-muted-foreground">Our NLP detects bias, sentiment, and key differences</p>
+            </div>
+            <div className="text-center">
+              <div className="mx-auto mb-4 w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary font-bold text-xl">
+                4
+              </div>
+              <h3 className="font-semibold mb-2">Compare Views</h3>
+              <p className="text-sm text-muted-foreground">See side-by-side perspectives from different countries</p>
+            </div>
           </div>
         </div>
       </section>
